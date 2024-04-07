@@ -9,7 +9,6 @@ case $1 in
     for host in ${hosts[@]}
     do
         echo "----------------- $host ---------------"
-        echo 1 > ${PF_HOME}/data/zookeeper/zkdata
         ssh $user@$host "${ZOOKEEPER_HOME}/bin/zkServer.sh start"
     done
 };;
