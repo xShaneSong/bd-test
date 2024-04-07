@@ -9,7 +9,7 @@ case $1 in
     for host in ${hosts[@]}
     do
         echo "----------------- $host ---------------"
-        ssh $user@$host "${KAFKA_HOME}/bin/kafka-server-start.sh ${KAFKA_HOME}/config/server.properties &"
+        ssh $user@$host "${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties"
     done
 };;
 "stop") {
