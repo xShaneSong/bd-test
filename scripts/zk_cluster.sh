@@ -1,23 +1,30 @@
 #!/bin/bash
 
-hosts=("hadoop01" "hadoop02" "hadoop03")
+hosts=(hadoop01 hadoop02 hadoop03)
+
+user=`whoami`
 
 case $1 in
 "start") {
-    for i in ${hosts}
+    for host in ${hosts[@]}
     do
-        ssh $i "zkServer.sh start"
+        echo "----------------- $host ---------------"
+        echo 1 > ${PF_HOME}/data/zookeeper/zkdata
+        ssh $user@$host "${ZOOKEEPER_HOME}/bin/zkServer.sh start"
     done
 };;
 "stop") {
-    for i in ${hosts}
+    for host in ${hosts[@]}
     do
-        ssh $i "zkServer.sh stop"
+        echo "----------------- $host ---------------"
+        ssh $user@$host "${ZOOKEEPER_HOME}/bin/zkServer.sh stop"
     done
 };;
 "status") {
-    for i in ${hosts}
+    for host in ${hosts[@]}
     do
-        ssh $i "zkServer.sh status"
+        echo "----------------- $host ---------------"
+        ssh $user@$host "${ZOOKEEPER_HOME}/bin/zkServer.sh status"
     done
 };;
+esac

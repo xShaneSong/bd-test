@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hosts=("hadoop01" "hadoop02" "hadoop03")
+hosts=(hadoop02 hadoop03)
 
 pcount=$#
 if ((pcount==0));then
@@ -15,10 +15,10 @@ echo fname=$fname
 pdir=`cd -P $(dirname $p1); pwd`
 echo pdir=$pdir
 
-user=`whomai`
+user=`whoami`
 
-for i in ${hosts}
+for i in ${hosts[@]}
 do
     echo "----------------- $i ---------------"
-    rsync -rv1 $pdir/$fname $user@$i:$pdir
+    rsync -rvl $pdir/$fname $user@$i:$pdir
 done
